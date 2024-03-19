@@ -1,0 +1,74 @@
+
+<button (click)="addEmployee()">Add Employee</button>
+<button (click)="toggleEmployeeList()">Employee List</button>
+
+
+
+<div *ngIf="showEmployeeList">
+  
+
+  <table>
+    <tr>
+      <th>Employee ID</th>
+      <th>Employee Number</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Birthday</th>
+      <th>Gender</th>
+      <th>Picture</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.EmployeeId }}</td>
+      <td>{{ employee.EmployeeNumber }}</td>
+      <td>{{ employee.FirstName }}</td>
+      <td>{{ employee.LastName }}</td>
+      <td>{{ employee.Birthday }}</td>
+      <td>{{ employee.Gender }}</td>
+      <td><img [src]="employee.Picture" alt="Employee Picture" style="max-width: 100px;"></td>
+      <td>
+        <button (click)="editEmployee(employee)">Edit</button>
+      </td>
+    </tr>
+  </table>
+</div>
+  <div *ngIf="showEditForm">
+    <h2>{{ editMode ? 'Edit Employee' : 'Add Employee' }}</h2>
+    <form #employeeForm="ngForm" (ngSubmit)="saveEmployee()">
+      <div>
+        <label for="employeeId">Employee ID:</label>
+        <input type="number" id="employeeId" name="EmployeeId" [(ngModel)]="editEmployeeData.EmployeeId" required>
+        <div *ngIf="employeeIdError" style="color: red;">{{ employeeIdError }}</div>
+      </div>
+      <div>
+        <label for="employeeNumber">Employee Number:</label>
+        <input type="text" id="employeeNumber" name="EmployeeNumber" [(ngModel)]="editEmployeeData.EmployeeNumber" required>
+      </div>
+      <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="FirstName" [(ngModel)]="editEmployeeData.FirstName" required>
+      </div>
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="LastName" [(ngModel)]="editEmployeeData.LastName" required>
+      </div>
+      <div>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="Birthday" [(ngModel)]="editEmployeeData.Birthday" required>
+        <div *ngIf="birthdayError" style="color: red;">{{ birthdayError }}</div>
+      </div>
+      <div>
+        <label for="gender">Gender:</label>
+        <select id="gender" name="Gender" [(ngModel)]="editEmployeeData.Gender" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div>
+        <label for="picture">Picture URL:</label>
+        <input type="text" id="picture" name="Picture" [(ngModel)]="editEmployeeData.Picture" required>
+      </div>
+      <button type="submit">{{ editMode ? 'Update' : 'Add' }}</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>

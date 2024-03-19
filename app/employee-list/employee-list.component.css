@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #be6363;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #c3eb4e;
+  }
+  
+  button {
+    margin-bottom: 20px;
+  }
+  
+  div {
+    margin-bottom: 10px;
+  }
